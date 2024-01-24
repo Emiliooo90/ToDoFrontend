@@ -1,6 +1,6 @@
 # ToDoFrontend
 
-Esta es una aplicación To Do creada con React.js que consume la API de ToDoBackend para gestionar tareas.
+Esta es una aplicación To Do creada con React.js que consume la API del repositorio ToDoBackend https://github.com/Emiliooo90/ToDoBackend.git para gestionar tareas.
 
 ## Instalación
 
