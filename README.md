@@ -36,4 +36,4 @@ Una vez que la aplicación esté en funcionamiento, podrás utilizarla para gest
 Si deseas contribuir a este proyecto, ¡te damos la bienvenida! Puedes hacerlo abriendo un PR (Pull Request) con tus cambios propuestos.
 
 ## Licencia
-Este proyecto está bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.
+Este proyecto esta bajo la licencia de Emilio Romero.
