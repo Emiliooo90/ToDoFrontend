@@ -1,0 +1,23 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.line-through {
+    text-decoration: line-through;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.animate-slide {
+    animation: slide 5s forwards;
+}
