@@ -22,9 +22,12 @@ const TasksPending = () => {
         fetchPendingTasks();
     }, []);
 
-    const formatDate = (dateString) => {
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        return new Date(dateString).toLocaleDateString('es-CL', options);
+    const formatDateTime = (dateTimeString) => {
+        const options = {
+            year: 'numeric', month: 'long', day: 'numeric',
+            hour: 'numeric', minute: 'numeric'
+        };
+        return new Date(dateTimeString).toLocaleString('es-CL', options);
     };
 
     return (
@@ -33,12 +36,12 @@ const TasksPending = () => {
             <div className="flex-1 relative">
                 <div className="p-4">
                     <h2 className="text-xl font-semibold mb-4">Tareas Pendientes</h2>
-                    {pendingTasks.length === 0 && <p className="text-center">No hay tareas pendientes</p>}
+                    {pendingTasks.length === 0 && <p className="text-center">Las tareas que tengan fecha de vencimiento apareceran acá</p>}
                     {pendingTasks.map((task) => (
                         <div key={task.id} className="flex items-center mb-4 border rounded-md p-4 relative">
                             <FaClock className="text-black mr-2" />
                             <h3>{task.titulo}</h3>
-                            <p className="ml-auto">{formatDate(task.fecha_fin)}</p>
+                            <p className="font-semibold ml-auto">{formatDateTime(task.fecha_fin)}</p>
                         </div>
                     ))}
                 </div>

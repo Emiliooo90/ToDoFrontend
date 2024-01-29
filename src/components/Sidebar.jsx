@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaRegStickyNote, FaRegCheckCircle, FaRegClock, FaStar, FaBars, FaTimes } from 'react-icons/fa';
+import { FaRegStickyNote, FaRegCheckCircle, FaRegClock, FaStar, FaBars, FaTimes, FaSearch } from 'react-icons/fa';
 import api from '../services/api';
 import '../styles.css';
 
@@ -89,6 +89,11 @@ const Sidebar = () => {
                         <div className="grid place-items-center mr-4">
                             <FaStar className="h-5 w-5" />
                         </div>Importantes
+                    </Link>
+                    <Link to="/search_tasks" className="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-blue-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active-text-blue-900 outline-none">
+                        <div className="grid place-items-center mr-4">
+                            <FaSearch className="h-5 w-5"/>
+                        </div>Buscar
                     </Link>
                 </nav>
             </div>

@@ -13,6 +13,7 @@ import {
 } from 'react-icons/ri';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Swal from 'sweetalert2';
 import '../styles.css';
 
 const Tasks = () => {
@@ -44,6 +45,17 @@ const Tasks = () => {
     };
 
     const handleAddTask = async () => {
+        if (newTask.trim() === '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Error',
+                text: 'Debes agregar una tarea',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK'
+            })
+            return;
+        }
+
         try {
             const response = await api.post('/tareas/', {
                 titulo: newTask,
@@ -139,6 +151,10 @@ const Tasks = () => {
                             className="border rounded-md p-2 mt-2 ml-4"
                             placeholderText="Seleccionar fecha"
                             dateFormat="dd/MM/yyyy"
+                            showTimeSelect
+                            timeFormat="HH:mm"
+                            timeIntervals={15}
+                            timeCaption="Hora"
                         />
                     </div>
                 </div>
