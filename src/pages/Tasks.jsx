@@ -45,11 +45,11 @@ const Tasks = () => {
     };
 
     const handleAddTask = async () => {
-        if (newTask.trim() === '') {
+        if (newTask.trim() === '' || selectedDate === null) {
             Swal.fire({
                 icon: 'warning',
                 title: 'Error',
-                text: 'Debes agregar una tarea',
+                text: 'Debes agregar una tarea y una fecha',
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'OK'
             })
@@ -142,20 +142,20 @@ const Tasks = () => {
                             className="border rounded-md p-2 mt-2"
                             placeholder="Nueva tarea"
                         />
-                        <button onClick={handleAddTask} className="bg-blue-500 text-white rounded-md p-2 mt-2 ml-4" title="Agregar tarea">
-                            Agregar
-                        </button>
                         <DatePicker
                             selected={selectedDate}
                             onChange={date => setSelectedDate(date)}
                             className="border rounded-md p-2 mt-2 ml-4"
-                            placeholderText="Seleccionar fecha"
+                            placeholderText="Fecha de vencimiento"
                             dateFormat="dd/MM/yyyy"
                             showTimeSelect
                             timeFormat="HH:mm"
                             timeIntervals={15}
                             timeCaption="Hora"
                         />
+                        <button onClick={handleAddTask} className="bg-blue-500 text-white rounded-md p-2 mt-2 ml-4" title="Agregar tarea">
+                            Agregar
+                        </button>
                     </div>
                 </div>
                 <div className="p-4">

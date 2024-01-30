@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { AiOutlineSearch } from 'react-icons/ai'; // Importa el ícono de búsqueda
+import { AiOutlineSearch } from 'react-icons/ai';
+import { RiCheckboxCircleFill, RiCheckboxBlankCircleLine } from 'react-icons/ri';
 import Sidebar from '../components/Sidebar.jsx';
 import api from '../services/api.js';
 import '../styles.css';
@@ -33,6 +34,24 @@ const TasksSearch = () => {
         setSearchTerm(event.target.value);
     };
 
+    const handleTaskCompletion = async (task) => {
+        try {
+            const updatedTask = { ...task, estado: task.estado === 'Completada' ? 'No completada' : 'Completada' };
+            await api.put(`/tareas/${task.id}/`, updatedTask);
+            setTasks(tasks.map(t => t.id === task.id ? updatedTask : t));
+        } catch (error) {
+            console.error('Error al cambiar el estado de completitud de la tarea:', error);
+        }
+    };
+
+    const formatDateTime = (dateTimeString) => {
+        const options = {
+            year: 'numeric', month: 'long', day: 'numeric',
+            hour: 'numeric', minute: 'numeric'
+        };
+        return new Date(dateTimeString).toLocaleString('es-CL', options)
+    }
+
     return (
         <div className="flex mt-6">
             <Sidebar />
@@ -52,9 +71,15 @@ const TasksSearch = () => {
                 </div>
                 <div>
                     {filteredTasks.map(task => (
-                        <div key={task.id} className={`shadow-md rounded-md p-4 mb-4 ${task.estado === 'Completada' ? 'bg-green-200' : 'bg-red-200'}`}>
-                            <h3 className="text-lg font-semibold mb-2">{task.titulo}</h3>
-                            <p className="text-gray-600">{/* Mostrar otros detalles de la tarea si es necesario */}</p>
+                        <div key={task.id} className={`flex items-center shadow-md rounded-md p-4 mb-4 ${task.estado === 'Completada' ? 'bg-green-200' : 'bg-red-200'}`}>
+                            <button className={`rounded-full h-6 w-6 mr-2 flex items-center justify-center ${task.estado === 'Completada' ? 'bg-green-500' : 'bg-gray-300'}`} onClick={() => handleTaskCompletion(task)} title="Marcar como completada">
+                                {task.estado === 'Completada' ? <RiCheckboxCircleFill className="text-white"/> : <RiCheckboxBlankCircleLine />}
+                            </button>
+                            <div>
+                                <h3 className="text-lg font-semibold mb-2">{task.titulo}</h3>
+                                <p className="text-gray-600">{task.estado}</p>
+                                <p className="text-gray-600">{formatDateTime(task.fecha_fin)}</p>
+                            </div>
                         </div>
                     ))}
                     {filteredTasks.length === 0 && (
